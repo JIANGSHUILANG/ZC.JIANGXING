@@ -136,7 +136,7 @@ where
 and datediff(
 	emi.repairservicetotime,
 	sysdate()
-) <= 9
+) <= @advancedays
 or emi.repairservicetotime <= sysdate()
 order by
 	datediff(
