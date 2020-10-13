@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using ZC.DAL.BLL;
 using ZC.DBUtils;
 
-namespace JiangXinCommand
+namespace JiangXinService.Utils
 {
     public class CommonBase
     {
@@ -56,14 +56,14 @@ namespace JiangXinCommand
         public readonly static string _SQLCONN1 = "Database='c01';Data Source='218.93.219.194';User Id='root';Password='123456';charset='utf8';pooling=true;port=9988;";
         public readonly static string _SQLCONN2 = "Database='v06';Data Source='218.93.219.194';User Id='root';Password='123456';charset='utf8';pooling=true;port=9988;";
 
-        public CommonBase()
-        {
-            Fail();
-        }
+        //public CommonBase()
+        //{
+        //    Fail();
+        //}
         /// <summary>
         /// 响应实体对象
         /// </summary>
-        public ReturnMsg resultData = new ReturnMsg();
+        protected ReturnMsg resultData = new ReturnMsg();
 
         protected static TOut TransReflection<TOut>(JObject tIn)
         {

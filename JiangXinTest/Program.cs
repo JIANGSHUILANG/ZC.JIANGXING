@@ -28,7 +28,7 @@ namespace JiangXinTest
             model.PageSize = 5;
             model.FuncName = "GetEquipmentMaintenanceWarning";
             model.AdvanceDays = 6;
-            module.GetEquipmentWarning(sqlConn, model);
+            //module.GetEquipmentWarning(sqlConn, model);
         }
     }
 }

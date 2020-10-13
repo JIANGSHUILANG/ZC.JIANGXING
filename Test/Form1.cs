@@ -38,14 +38,15 @@ namespace Test
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //
             EquipmentparameterModule module = new EquipmentparameterModule();
             ParameterModel model = new ParameterModel();
             model.PageIndex = 1;
             model.PageSize = 5;
             model.AdvanceDays = Convert.ToInt32(textBox2.Text);
             model.FuncName = comboBox1.SelectedValue.ToString();
-            ReturnMsg msgM = module.GetEquipmentWarning(sqlConn, model);
-            textBox1.Text = JsonConvert.SerializeObject(msgM);
+            //ReturnMsg msgM = module.GetEquipmentWarning(sqlConn, model);
+            //textBox1.Text = JsonConvert.SerializeObject(msgM);
         }
     }
 }

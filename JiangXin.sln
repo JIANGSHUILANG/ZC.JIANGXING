@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiangXinModel", "JiangXinModel\JiangXinModel.csproj", "{AAADC3DE-31FA-4DC0-A9C3-1ED6930D6569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiangXinCommand", "JiangXinCommand\JiangXinCommand.csproj", "{CAC48CBB-2E27-4AE0-8E21-C900EC910588}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiangXinService", "JiangXinService\JiangXinService.csproj", "{78637B70-02F8-40A2-8E65-9D0030B4D09A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiangXinTest", "JiangXinTest\JiangXinTest.csproj", "{E272F829-0D70-42C7-9FAE-AF3FF58C293E}"
@@ -23,10 +21,6 @@ Global
 		{AAADC3DE-31FA-4DC0-A9C3-1ED6930D6569}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAADC3DE-31FA-4DC0-A9C3-1ED6930D6569}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAADC3DE-31FA-4DC0-A9C3-1ED6930D6569}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CAC48CBB-2E27-4AE0-8E21-C900EC910588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CAC48CBB-2E27-4AE0-8E21-C900EC910588}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CAC48CBB-2E27-4AE0-8E21-C900EC910588}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CAC48CBB-2E27-4AE0-8E21-C900EC910588}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78637B70-02F8-40A2-8E65-9D0030B4D09A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78637B70-02F8-40A2-8E65-9D0030B4D09A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78637B70-02F8-40A2-8E65-9D0030B4D09A}.Release|Any CPU.ActiveCfg = Release|Any CPU

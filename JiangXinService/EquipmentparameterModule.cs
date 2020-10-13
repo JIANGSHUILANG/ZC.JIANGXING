@@ -1,4 +1,4 @@
-﻿using JiangXinCommand;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ZC.DAL.BLL;
 using ZC.DBUtils;
 using Newtonsoft.Json;
+using JiangXinService.Utils;
 
 namespace JiangXinService
 {
@@ -16,12 +17,12 @@ namespace JiangXinService
         LoginUserInfo userInfo;
         ParameterModel model;
         string sqlConn;
-        public ReturnMsg GetEquipmentWarning(string sqlConn, object Parameter)
-        {
-            this.sqlConn = sqlConn;
-            model = Parameter as ParameterModel;
-            return GetWarning();
-        }
+        //public ReturnMsg GetEquipmentWarning(string sqlConn, object Parameter)
+        //{
+        //    this.sqlConn = sqlConn;
+        //    model = Parameter as ParameterModel;
+        //    return GetWarning();
+        //}
         /// <summary>
         /// 获取设备预警
         /// </summary>
@@ -31,6 +32,11 @@ namespace JiangXinService
             userInfo = BasePubCommon.FindLoginUserInfo(Parameter.token);
             model = JsonConvert.DeserializeObject<ParameterModel>(Parameter.obj.ToString());
             return GetWarning();
+        }
+        public ReturnMsg Test(InvokeEntity Parameter) {
+            //Success();
+          return  new ReturnMsg();
+            //return resultData;
         }
         ReturnMsg GetWarning()
         {
@@ -68,6 +74,8 @@ namespace JiangXinService
             {
                 Fail(ex.ToString());
             }
+            var msg = JsonConvert.SerializeObject(resultData);
+            //return msg;
             return resultData;
         }
         /// <summary>
@@ -82,44 +90,17 @@ namespace JiangXinService
 		emi.repairservicetotime,
 		sysdate()
 	) days,
-	emi.repairservicetotime,
-	#保修期至
-	emi. code emicode,
-	#设备编码
-	emi. name emsname,
-	#设备名称
-	purchasedata,
-	#采购日期
-	repaircycle,
-	#检修周期
-	repairunit,
-	#检修周期单位
-	nextrepairtime,
-	#下次检修日期
-	emi.price,
-	#原值
-	sbr.id brandid,
-	#品牌id
-	sbr. name brandname,
-	#品牌名称
-	scs.id specificationid,
-	#规格型号id
-	scs. name specificationname,
-	#规格型号名称
-	pd.id productionid,
-	#生产商id
-	pd. name productionname,
-	#生产商名称
-	spp.suppliername,
-	#供应商名称
-	spp.supplierid,
-	#供应商编号
-	spp.id sid,
-	#供应商id
-	dep.departid,
-	#部门编号
-	dep.departname,
-	#部门名称
+	emi.repairservicetotime,#保修期至
+	emi. code emicode, #设备编码
+	emi. name emsname, #设备名称
+	purchasedata, #采购日期
+	nextrepairtime, #下次检修日期
+	emi.price, #原值
+	spp.suppliername, #供应商名称
+	spp.supplierid, #供应商编号
+	spp.id sid, #供应商id
+	dep.departid, #部门编号
+	dep.departname, #部门名称
 	dep.id did #部门id
 from
 	sfcdatequipmentinfo emi

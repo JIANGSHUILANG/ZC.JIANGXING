@@ -129,19 +129,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="EquipmentparameterModule.cs" />
+    <Compile Include="Model\Class1.cs" />
     <Compile Include="ParameterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\CommonBase.cs" />
     <Compile Include="Utils\TestRocketMQ.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\JiangXinCommand\JiangXinCommand.csproj">
-      <Project>{cac48cbb-2e27-4ae0-8e21-c900ec910588}</Project>
-      <Name>JiangXinCommand</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ParameterModel\" />
