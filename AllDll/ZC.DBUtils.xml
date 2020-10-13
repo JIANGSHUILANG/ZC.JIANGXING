@@ -1,0 +1,816 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZC.DBUtils</name>
+    </assembly>
+    <members>
+        <member name="T:ZC.DBUtils.CmdParameter">
+            <summary>
+            数据库自定义参数
+            </summary>
+        </member>
+        <member name="T:ZC.DBUtils.MongoAttribute">
+            <summary>
+            Mongo实体标签
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.MongoAttribute.Database">
+            <summary>
+            交换机名称
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.MongoAttribute.Collection">
+            <summary>
+            队列名称
+            </summary>
+        </member>
+        <member name="T:ZC.DBUtils.MongodbHelper">
+            <summary>
+            MongoDb操作封装
+            </summary>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.#ctor(System.String)">
+            <summary>
+            初始化连接
+            </summary>
+            <param name="db"></param>
+            <param name="_connStr"></param>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.Add``1(System.String,``0)">
+            <summary>
+            新增数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection">集合（表）</param>
+            <param name="entity">实体(文档)</param>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.AddForJsonAsync(System.String,System.String)">
+            <summary>
+            根据JSON字符串，进行同步新增数据
+            </summary>
+            <param name="tablename">表名</param>
+            <param name="json">JSON字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.AddForJson(System.String,System.String)">
+            <summary>
+            根据JSON字符串，进行异步新增数据
+            </summary>
+            <param name="tablename">表名</param>
+            <param name="json">JSON字符串</param>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.Add(System.String,System.Collections.Generic.List{System.Collections.Generic.List{ZC.DBUtils.MongoBsonDocument}})">
+            <summary>
+            通过键值对象进行新增数据
+            </summary>
+            <param name="collection"></param>
+            <param name="entity"></param>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.AddAsync``1(System.String,``0)">
+            <summary>
+            增（异步）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection">集合（表）</param>
+            <param name="entity">实体(文档)</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.BatchAddAsync``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            批量增（异步）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection">集合（表）</param>
+            <param name="entity">实体(文档)集合</param>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.BatchAddAsync(System.String,System.Collections.Generic.List{System.Collections.Generic.List{ZC.DBUtils.MongoBsonDocument}})">
+            <summary>
+            批量曾，使用动态对象，方便前端进行数据插入
+            </summary>
+            <param name="collection"></param>
+            <param name="conditions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.BatchAdd``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            批量增（同步）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection">集合（表）</param>
+            <param name="entity">实体(文档)</param>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.Delete``1(System.String,``0)">
+            <summary>
+            删 通过_id
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection">集合</param>
+            <param name="entity">实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.Delete``1(System.String,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            删 通过linq表达式
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection">集合</param>
+            <param name="predicate">查询条件</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.Delete(System.String,System.Collections.Generic.List{ZC.DBUtils.Condition})">
+            <summary>
+            删除 通过集合的方式进行多条件删除
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <param name="conditions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.DeleteAsync``1(System.String,``0)">
+            <summary>
+            删
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection">集合</param>
+            <param name="entity">实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.DeleteAsync``1(System.String,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            删除 通过Linq表达式进行删除
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection">集合</param>
+            <param name="predicate">实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.DeleteAsync(System.String,System.Collections.Generic.List{ZC.DBUtils.Condition})">
+            <summary>
+            删除通过集合条件删除
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <param name="conditions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.Update(System.String,System.Collections.Generic.List{ZC.DBUtils.Condition},System.Collections.Generic.List{ZC.DBUtils.Condition})">
+            <summary>
+            更新实体
+            </summary>
+            <param name="collection">更新字段</param>
+            <param name="conditions">更新条件</param>
+            <param name="whereconditions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.UpdateAsync(System.String,System.Collections.Generic.List{ZC.DBUtils.Condition},System.Collections.Generic.List{ZC.DBUtils.Condition})">
+            <summary>
+            更新
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="database">库</param>
+            <param name="collection">集合</param>
+            <param name="predicate">条件</param>
+            <param name="entity">实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.QueryCollectionAll(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            更新
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="predicate">条件</param>
+            <param name="lambda">实体</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.QueryCollectionCondition(System.String,System.Int32,System.Int32,System.Collections.Generic.List{System.String},System.Collections.Generic.List{ZC.DBUtils.Condition})">
+            <summary>
+            分页多条件查询
+            </summary>
+            <param name="collection"></param>
+            <param name="pageidx"></param>
+            <param name="pagesize"></param>
+            <param name="fieldlist"></param>
+            <param name="condtions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.QueryCollectionConditionFirst(System.String,System.Collections.Generic.List{ZC.DBUtils.Condition})">
+            <summary>
+            查询集合文档中第一条记录
+            </summary>
+            <param name="collection"></param>
+            <param name="condtions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.QueryCollectionConditionByExpressOrderby``1(System.String,System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,``0}})">
+            <summary>
+            查询集合分页文档通过Linq表达式单维度排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <param name="pageidx"></param>
+            <param name="pagesize"></param>
+            <param name="express"></param>
+            <param name="sort"></param>
+            <param name="asc_desc"></param>
+            <param name="project"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.QueryCollectionConditionByExpressOrderbys``1(System.String,System.Int32,System.Int32,System.Collections.Generic.List{System.String},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Collections.Generic.List{ZC.DBUtils.SortInfo})">
+            <summary>
+            查询集合分页文档通过Linq表达式多维度排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <param name="pageidx"></param>
+            <param name="pagesize"></param>
+            <param name="express"></param>
+            <param name="sort"></param>
+            <param name="project"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.QueryCollectionConditionCount(System.String,System.Collections.Generic.List{ZC.DBUtils.Condition})">
+            <summary>
+            查询集合条件结果行数
+            </summary>
+            <param name="collection"></param>
+            <param name="condtions"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.QueryCollectionAllCount(System.String)">
+            <summary>
+            查询集合所有行数
+            </summary>
+            <param name="collection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.GetAsync``1(System.String,System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Linq.Expressions.Expression{System.Func{``0,``0}})">
+            <summary>
+            底层查询公共类单条件查询维度
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <param name="pageidx"></param>
+            <param name="pagesize"></param>
+            <param name="predicate"></param>
+            <param name="sort"></param>
+            <param name="asc_desc"></param>
+            <param name="projector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.GetAsync``1(System.String,System.Int32,System.Int32,System.Collections.Generic.List{System.String},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Collections.Generic.List{ZC.DBUtils.SortInfo})">
+            <summary>
+            底层查询公共类多条件查询维度
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <param name="pageidx"></param>
+            <param name="pagesize"></param>
+            <param name="predicate"></param>
+            <param name="sort"></param>
+            <param name="projector"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.GetDBList">
+            <summary>
+            查询数据库列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.GetCollectionsList">
+            <summary>
+            获取数据库下集合列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.DropDB">
+            <summary>
+            删除数据库
+            </summary>
+        </member>
+        <member name="M:ZC.DBUtils.MongodbHelper.DropCollection(System.String)">
+            <summary>
+            删除集合
+            </summary>
+            <param name="collection"></param>
+        </member>
+        <member name="T:ZC.DBUtils.Condition">
+            <summary>
+            查询集合条件对象
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.Condition.key">
+            <summary>
+            集合文本key
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.Condition.val">
+            <summary>
+            集合文件key对应值
+            </summary>
+        </member>
+        <member name="T:ZC.DBUtils.SortInfo">
+            <summary>
+            集合查询排序对象
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.SortInfo.ColumnsID">
+            <summary>
+            排序字段
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.SortInfo.sotrType">
+            <summary>
+            排序规则
+            </summary>
+        </member>
+        <member name="T:ZC.DBUtils.SotrType">
+            <summary>
+            排序方式
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.SotrType.Asc">
+            <summary>
+            升序
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.SotrType.Desc">
+            <summary>
+            降序
+            </summary>
+        </member>
+        <member name="M:ZC.DBUtils.PageList`1.#ctor(System.Int32,System.Int32,System.Int32,System.Collections.Generic.List{`0})">
+            <summary>
+            
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">页项</param>
+            <param name="totalCount">总数</param>
+            <param name="items">元素</param>
+        </member>
+        <member name="P:ZC.DBUtils.PageList`1.Total">
+            <summary>
+            总数
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.PageList`1.Items">
+            <summary>
+            元素
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.PageList`1.PageSize">
+            <summary>
+            页项
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.PageList`1.PageIndex">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.PageList`1.TotalPage">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.PageList`1.HasPrev">
+            <summary>
+            是否有上一页
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.PageList`1.HasNext">
+            <summary>
+            是否有下一页
+            </summary>
+        </member>
+        <member name="T:ZC.DBUtils.MongoParasEntity">
+            <summary>
+            参数对象
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.MongoParasEntity.db">
+            <summary>
+            数据库
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.MongoParasEntity.collection">
+            <summary>
+            集合
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.MongoParasEntity.pageidx">
+            <summary>
+            第几页
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.MongoParasEntity.pagesize">
+            <summary>
+            每页大小
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.MongoParasEntity.entityBody">
+            <summary>
+            实体对象
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.MongoParasEntity.fieldlist">
+            <summary>
+            返回列信息,空集合返回全部
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.MongoParasEntity.setconditions">
+            <summary>
+            更新值对象
+            </summary>
+        </member>
+        <member name="P:ZC.DBUtils.MongoParasEntity.conditions">
+            <summary>
+            查询条件
+            </summary>
+        </member>
+        <member name="T:ZC.DBUtils.RedisHelper">
+            <summary>
+            缓存服务类库
+            </summary>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.CalcLuaSha1(System.String)">
+            <summary>
+            LUA哈希计算
+            </summary>
+            <param name="lua"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.JsonDeserialize``1(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Dictionnary转换为T对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dict"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.Info">
+            <summary>
+            通过LUA获取Redis状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.StringIncr(System.String)">
+            <summary>
+            将 key 中储存的数字值增一
+            </summary>
+            <param name="redisKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.StringExists(System.String)">
+            <summary>
+            检查给定 key 是否存在。
+            </summary>
+            <param name="redisKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.HashGetAll(System.String)">
+            <summary>
+            获取Hash表中所有的Field和Value
+            </summary>
+            <param name="redisKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.HashIncrement(System.String,System.String,System.Int64)">
+            <summary>
+            哈希表 key 中的指定字段的整数值加上增量value(long) 
+            </summary>
+            <param name="redisKey"></param>
+            <param name="hashField"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.ListLength(System.String)">
+            <summary>
+            获取列表长度
+            </summary>
+            <param name="redisKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.ListRange(System.String)">
+            <summary>
+            获取列表所有元素
+            </summary>
+            <param name="redisKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.ListRange(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取列表指定范围内元素
+            </summary>
+            <param name="redisKey"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.SetSMEMBERS(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="redisKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.SetRemove(System.String,StackExchange.Redis.RedisValue)">
+            <summary>
+            移除集合中的一个成员元素，不存在的成员元素会被忽略。
+            </summary>
+            <param name="redisKey"></param>
+            <param name="vals"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.SetContains(System.String,StackExchange.Redis.RedisValue)">
+            <summary>
+            判断成员元素是否是集合的成员。
+            </summary>
+            <param name="redisKey"></param>
+            <param name="vals"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.SetLength(System.String)">
+            <summary>
+            获取集合的成员数
+            </summary>
+            <param name="redisKey"></param>
+            <param name="vals"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RedisHelper.StringTTL(System.String)">
+            <summary>
+            剩余过期时间(毫秒)
+            </summary>
+            <param name="redisKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RocketMqHelper.CreateDefaultMQProducer(System.String,System.Int32)">
+            <summary>
+            创建生产者
+            </summary>
+            <param name="group"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RocketMqHelper.CreateDefaultMQPushConsumer``1(System.String,org.apache.rocketmq.common.protocol.heartbeat.MessageModel,System.String,System.String)">
+            <summary>
+            创建消费者,如果己存在这个消费者，会直接返回
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="groupName">是分组名字，用来区分消费者</param>
+            <param name="messageModel">消费模式，比如广播模式、集群模式</param>
+            <param name="topic">topic</param>
+            <param name="subExpression">subExpression</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RocketMqHelper.SendMessage(org.apache.rocketmq.client.producer.DefaultMQProducer,System.String,System.String,System.String)">
+            <summary>
+            用生产者对象发送同步消息
+            </summary>
+            <param name="producer">生产者对象</param>
+            <param name="toptic"></param>
+            <param name="subExpression"></param>
+            <param name="body"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RocketMqHelper.SendMessageAsync(org.apache.rocketmq.client.producer.DefaultMQProducer,System.String,System.String,System.String)">
+            <summary>
+            用生产者对象发送异步消息
+            </summary>
+            <param name="producer">生产者对象</param>
+            <param name="toptic"></param>
+            <param name="subExpression"></param>
+            <param name="body"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RocketMqHelper.SendMessage(System.String,System.String,System.String,System.String)">
+            <summary>
+            用生产者名称发送同步消息，若名称不存在，自动创建该名称的生产者
+            </summary>
+            <param name="producer">生产者对象</param>
+            <param name="toptic"></param>
+            <param name="subExpression"></param>
+            <param name="body"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RocketMqHelper.SendMessageAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            用生产者名称发送异步消息,若名称不存在，自动创建该名称的生产者
+            </summary>
+            <param name="producer">生产者对象</param>
+            <param name="toptic"></param>
+            <param name="subExpression"></param>
+            <param name="body"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RocketMqHelper.SendMessageEntity``1(System.String,System.String,System.String,``0)">
+            <summary>
+            用生产者名称发送同步消息，若名称不存在，自动创建该名称的生产者
+            </summary>
+            <param name="producerGroupName">生产者对象名称</param>
+            <param name="toptic"></param>
+            <param name="subExpression"></param>
+            <param name="body"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZC.DBUtils.RocketMqHelper.SendMessageAsyncEntity``1(System.String,System.String,System.String,``0)">
+            <summary>
+            用生产者名称发送异步消息,若名称不存在，自动创建该名称的生产者
+            </summary>
+            <param name="producerGroupName">生产者对象</param>
+            <param name="toptic"></param>
+            <param name="subExpression"></param>
+            <param name="body"></param>
+            <returns></returns>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Object">
+            <summary>
+            Object 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Type">
+            <summary>
+            Type 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.IList">
+            <summary>
+            Type 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Long">
+            <summary>
+            Type 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Float">
+            <summary>
+            Type 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.String">
+            <summary>
+            Stirng 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Char">
+            <summary>
+            Char 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Boolean">
+            <summary>
+            Boolean 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Byte">
+            <summary>
+            Byte 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.ByteArray">
+            <summary>
+            Byte 数组类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.SByte">
+            <summary>
+            SByte 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.UInt16">
+            <summary>
+            UInt16 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Int">
+            <summary>
+            Int32 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.UInt32">
+            <summary>
+            UInt32 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.UInt64">
+            <summary>
+            UInt64 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Double">
+            <summary>
+            Double 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Single">
+            <summary>
+            Single 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Decimal">
+            <summary>
+            Decimal 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Guid">
+            <summary>
+            Guid 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.DateTime">
+            <summary>
+            DateTime 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.TimeSpan">
+            <summary>
+            TimeSpan 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Nullable">
+            <summary>
+            Nullable 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.ValueType">
+            <summary>
+            ValueType 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Void">
+            <summary>
+            void 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.DBNull">
+            <summary>
+            DBNull 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.Delegate">
+            <summary>
+            Delegate 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.ByteEnumerable">
+            <summary>
+            ByteEnumerable 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.IEnumerableOfT">
+            <summary>
+            IEnumerable 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.IEnumerable">
+            <summary>
+            IEnumerable 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.IListSource">
+            <summary>
+            IListSource 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.IDictionary">
+            <summary>
+            IDictionary 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.IDictionaryOfT">
+            <summary>
+            IDictionary 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.DictionaryOfT">
+            <summary>
+            Dictionary 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.IDataReader">
+            <summary>
+            IDataReader 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.DataTable">
+            <summary>
+            DataTable 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.DataRow">
+            <summary>
+            DataRow 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.IDictionaryOfStringAndObject">
+            <summary>
+            IDictionary 类型
+            </summary>
+        </member>
+        <member name="F:ZC.DBUtils.Types.IDictionaryOfStringAndString">
+            <summary>
+            IDictionary 类型
+            </summary>
+        </member>
+    </members>
+</doc>
