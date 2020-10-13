@@ -3,13 +3,56 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiangXinModel", "JiangXinModel\JiangXinModel.csproj", "{AAADC3DE-31FA-4DC0-A9C3-1ED6930D6569}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiangXinService", "JiangXinService\JiangXinService.csproj", "{78637B70-02F8-40A2-8E65-9D0030B4D09A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiangXinTest", "JiangXinTest\JiangXinTest.csproj", "{E272F829-0D70-42C7-9FAE-AF3FF58C293E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{12D22B85-C2FE-492F-95D2-C7750F3D64AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{701E4EB1-C80E-4A28-8C50-A7864BEBBA95}"
+	ProjectSection(SolutionItems) = preProject
+		AllDll\fastjson-1.2.12.dll = AllDll\fastjson-1.2.12.dll
+		AllDll\IKVM.OpenJDK.Charsets.dll = AllDll\IKVM.OpenJDK.Charsets.dll
+		AllDll\IKVM.OpenJDK.Core.dll = AllDll\IKVM.OpenJDK.Core.dll
+		AllDll\IKVM.OpenJDK.Jdbc.dll = AllDll\IKVM.OpenJDK.Jdbc.dll
+		AllDll\IKVM.OpenJDK.Management.dll = AllDll\IKVM.OpenJDK.Management.dll
+		AllDll\IKVM.OpenJDK.Security.dll = AllDll\IKVM.OpenJDK.Security.dll
+		AllDll\IKVM.OpenJDK.SwingAWT.dll = AllDll\IKVM.OpenJDK.SwingAWT.dll
+		AllDll\IKVM.OpenJDK.Text.dll = AllDll\IKVM.OpenJDK.Text.dll
+		AllDll\IKVM.OpenJDK.Util.dll = AllDll\IKVM.OpenJDK.Util.dll
+		AllDll\IKVM.Runtime.dll = AllDll\IKVM.Runtime.dll
+		AllDll\MesInvoke.dll = AllDll\MesInvoke.dll
+		AllDll\MesInvoke.pdb = AllDll\MesInvoke.pdb
+		AllDll\MongoDB.Bson.dll = AllDll\MongoDB.Bson.dll
+		AllDll\MongoDB.Bson.pdb = AllDll\MongoDB.Bson.pdb
+		AllDll\MongoDB.Bson.xml = AllDll\MongoDB.Bson.xml
+		AllDll\MongoDB.Driver.Core.dll = AllDll\MongoDB.Driver.Core.dll
+		AllDll\MongoDB.Driver.Core.pdb = AllDll\MongoDB.Driver.Core.pdb
+		AllDll\MongoDB.Driver.Core.xml = AllDll\MongoDB.Driver.Core.xml
+		AllDll\MongoDB.Driver.dll = AllDll\MongoDB.Driver.dll
+		AllDll\MongoDB.Driver.pdb = AllDll\MongoDB.Driver.pdb
+		AllDll\MongoDB.Driver.xml = AllDll\MongoDB.Driver.xml
+		AllDll\MySql.Data.dll = AllDll\MySql.Data.dll
+		AllDll\netty-all-4.0.36.Final.dll = AllDll\netty-all-4.0.36.Final.dll
+		AllDll\Newtonsoft.Json.dll = AllDll\Newtonsoft.Json.dll
+		AllDll\rocketmq-client-4.2.0-incubating.dll = AllDll\rocketmq-client-4.2.0-incubating.dll
+		AllDll\rocketmq-common-4.2.0-incubating.dll = AllDll\rocketmq-common-4.2.0-incubating.dll
+		AllDll\rocketmq-remoting-4.2.0-incubating.dll = AllDll\rocketmq-remoting-4.2.0-incubating.dll
+		AllDll\slf4j-api-1.7.5.dll = AllDll\slf4j-api-1.7.5.dll
+		AllDll\StackExchange.Redis.dll = AllDll\StackExchange.Redis.dll
+		AllDll\System.Runtime.InteropServices.RuntimeInformation.dll = AllDll\System.Runtime.InteropServices.RuntimeInformation.dll
+		AllDll\websocket-sharp.dll = AllDll\websocket-sharp.dll
+		AllDll\ZC.DAL.BLL.dll = AllDll\ZC.DAL.BLL.dll
+		AllDll\ZC.DBUtils.dll = AllDll\ZC.DBUtils.dll
+		AllDll\ZC.DBUtils.dll.config = AllDll\ZC.DBUtils.dll.config
+		AllDll\ZC.DBUtils.pdb = AllDll\ZC.DBUtils.pdb
+		AllDll\ZC.DBUtils.xml = AllDll\ZC.DBUtils.xml
+		AllDll\ZC.DTEST.dll = AllDll\ZC.DTEST.dll
+		AllDll\ZC.LUtils.Common.dll = AllDll\ZC.LUtils.Common.dll
+		AllDll\ZC.LUtils.Common.pdb = AllDll\ZC.LUtils.Common.pdb
+		AllDll\ZC.LUtils.dll = AllDll\ZC.LUtils.dll
+		AllDll\ZC.LUtils.pdb = AllDll\ZC.LUtils.pdb
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +60,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AAADC3DE-31FA-4DC0-A9C3-1ED6930D6569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AAADC3DE-31FA-4DC0-A9C3-1ED6930D6569}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AAADC3DE-31FA-4DC0-A9C3-1ED6930D6569}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AAADC3DE-31FA-4DC0-A9C3-1ED6930D6569}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78637B70-02F8-40A2-8E65-9D0030B4D09A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78637B70-02F8-40A2-8E65-9D0030B4D09A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78637B70-02F8-40A2-8E65-9D0030B4D09A}.Release|Any CPU.ActiveCfg = Release|Any CPU

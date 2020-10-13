@@ -57,10 +57,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JiangXinModel\JiangXinModel.csproj">
-      <Project>{aaadc3de-31fa-4dc0-a9c3-1ed6930d6569}</Project>
-      <Name>JiangXinModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\JiangXinService\JiangXinService.csproj">
       <Project>{78637b70-02f8-40a2-8e65-9d0030b4d09a}</Project>
       <Name>JiangXinService</Name>
