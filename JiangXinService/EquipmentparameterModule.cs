@@ -17,12 +17,12 @@ namespace JiangXinService
         LoginUserInfo userInfo;
         ParameterModel model;
         string sqlConn;
-        //public ReturnMsg GetEquipmentWarning(string sqlConn, object Parameter)
-        //{
-        //    this.sqlConn = sqlConn;
-        //    model = Parameter as ParameterModel;
-        //    return GetWarning();
-        //}
+        public ReturnMsg GetEquipmentWarning(string sqlConn, object Parameter)
+        {
+            this.sqlConn = sqlConn;
+            model = Parameter as ParameterModel;
+            return GetWarning();
+        }
         /// <summary>
         /// 获取设备预警
         /// </summary>
@@ -306,6 +306,10 @@ order by datediff(
             //limit @pageindex,@pagesize;";
             #endregion
             return cmdSql;
+        }
+
+        void InsertSysdatdepartment() {
+
         }
 
 

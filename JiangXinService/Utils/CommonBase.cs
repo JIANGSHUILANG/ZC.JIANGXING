@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JiangXinService.Model;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -14,35 +15,35 @@ namespace JiangXinService.Utils
     public class CommonBase
     {
         #region 执行结果代码
-        /// <summary>
-        /// 执行失败
-        /// </summary>
-        protected static readonly string _FAIL_STATUS = 0.ToString();
+        ///// <summary>
+        ///// 执行失败
+        ///// </summary>
+        //protected static readonly string _FAIL_STATUS = 0.ToString();
 
-        /// <summary>
-        /// 执行成功
-        /// </summary>
-        protected static readonly string _SUCCESS_STATUS = 1.ToString();
+        ///// <summary>
+        ///// 执行成功
+        ///// </summary>
+        //protected static readonly string _SUCCESS_STATUS = 1.ToString();
 
-        /// <summary>
-        /// 成功提示
-        /// </summary>
-        protected static readonly string _SUCCESS_MESSAGE = "执行成功";
+        ///// <summary>
+        ///// 成功提示
+        ///// </summary>
+        //protected static readonly string _SUCCESS_MESSAGE = "执行成功";
 
-        /// <summary>
-        /// 系统异常
-        /// </summary>
-        protected static readonly string _ERROR_MESSAGE = "系统异常：";
+        ///// <summary>
+        ///// 系统异常
+        ///// </summary>
+        //protected static readonly string _ERROR_MESSAGE = "系统异常：";
 
-        /// <summary>
-        /// 执行失败
-        /// </summary>
-        protected static readonly string _FAIL_MESSAGE = "执行失败";
+        ///// <summary>
+        ///// 执行失败
+        ///// </summary>
+        //protected static readonly string _FAIL_MESSAGE = "执行失败";
 
-        /// <summary>
-        /// 参数异常
-        /// </summary>
-        protected static readonly string _PARAMETER_ERROR_MESSAGE = "参数异常";
+        ///// <summary>
+        ///// 参数异常
+        ///// </summary>
+        //protected static readonly string _PARAMETER_ERROR_MESSAGE = "参数异常";
         #endregion
 
         /// <summary>
@@ -56,10 +57,10 @@ namespace JiangXinService.Utils
         public readonly static string _SQLCONN1 = "Database='c01';Data Source='218.93.219.194';User Id='root';Password='123456';charset='utf8';pooling=true;port=9988;";
         public readonly static string _SQLCONN2 = "Database='v06';Data Source='218.93.219.194';User Id='root';Password='123456';charset='utf8';pooling=true;port=9988;";
 
-        //public CommonBase()
-        //{
-        //    Fail();
-        //}
+        public CommonBase()
+        {
+            Fail();
+        }
         /// <summary>
         /// 响应实体对象
         /// </summary>
@@ -186,20 +187,20 @@ namespace JiangXinService.Utils
 
             }
         }
-        public void Fail()
+        void Fail()
         {
-            resultData.Status = _FAIL_STATUS;
-            resultData._ReturnMsg = _FAIL_MESSAGE;
+            resultData.Status = ErrorModel._FAIL_STATUS;
+            resultData._ReturnMsg = ErrorModel._FAIL_MESSAGE;
             resultData.MsgCode = "-1";
         }
         public void Fail(string message)
         {
-            resultData._ReturnMsg = _FAIL_MESSAGE + "-" + message;
+            resultData._ReturnMsg = ErrorModel._FAIL_MESSAGE + "-" + message;
         }
         public void Success()
         {
-            resultData.Status = _SUCCESS_STATUS;
-            resultData._ReturnMsg = _SUCCESS_MESSAGE;
+            resultData.Status = ErrorModel._SUCCESS_STATUS;
+            resultData._ReturnMsg = ErrorModel._SUCCESS_MESSAGE;
             resultData.MsgCode = "0";
         }
     }
