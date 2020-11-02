@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{701E4EB1-C80E-4A28-8C50-A7864BEBBA95}"
 	ProjectSection(SolutionItems) = preProject
+		AllDll\EntityFramework.dll = AllDll\EntityFramework.dll
+		AllDll\EntityFramework.xml = AllDll\EntityFramework.xml
 		AllDll\fastjson-1.2.12.dll = AllDll\fastjson-1.2.12.dll
 		AllDll\IKVM.OpenJDK.Charsets.dll = AllDll\IKVM.OpenJDK.Charsets.dll
 		AllDll\IKVM.OpenJDK.Core.dll = AllDll\IKVM.OpenJDK.Core.dll
@@ -54,6 +56,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		AllDll\ZC.LUtils.pdb = AllDll\ZC.LUtils.pdb
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{94AB4D8C-7D17-4EC1-9447-2824D8995DF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +76,10 @@ Global
 		{12D22B85-C2FE-492F-95D2-C7750F3D64AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12D22B85-C2FE-492F-95D2-C7750F3D64AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12D22B85-C2FE-492F-95D2-C7750F3D64AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94AB4D8C-7D17-4EC1-9447-2824D8995DF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94AB4D8C-7D17-4EC1-9447-2824D8995DF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94AB4D8C-7D17-4EC1-9447-2824D8995DF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94AB4D8C-7D17-4EC1-9447-2824D8995DF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

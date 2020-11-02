@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZC.DAL.BLL;
 using Newtonsoft.Json;
+using JiangXinService.Utils;
+
 namespace Test
 {
     public partial class Form1 : Form
@@ -40,13 +42,24 @@ namespace Test
         {
             //
             EquipmentparameterModule module = new EquipmentparameterModule();
-            ParameterModel model = new ParameterModel();
+            EquipmentModel model = new EquipmentModel();
             model.PageIndex = 1;
             model.PageSize = 5;
             model.AdvanceDays = Convert.ToInt32(textBox2.Text);
             model.FuncName = comboBox1.SelectedValue.ToString();
             ReturnMsg msgM = module.GetEquipmentWarning(sqlConn, model);
             textBox1.Text = JsonConvert.SerializeObject(msgM);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            EquipmentparameterModule eqi = new EquipmentparameterModule();
+            Sfcdatequipmentspecies ss = new Sfcdatequipmentspecies();
+            ss.name = "送料车";
+            ss.parentcode = "003";
+            ss.Creator = "江";
+            
+            //var ret = eqi.AutoSetEquipmentSpecieCodeTest(sqlConn, JsonConvert.SerializeObject(ss));
         }
     }
 }

@@ -195,6 +195,7 @@ namespace JiangXinService.Utils
         }
         public void Fail(string message)
         {
+            Fail();
             resultData._ReturnMsg = ErrorModel._FAIL_MESSAGE + "-" + message;
         }
         public void Success()

@@ -14,9 +14,5 @@ namespace JiangXinService.Model
         public string ReturnCnt { get; set; }
         public string Status { get; set; }
         public string _ReturnMsg { get; set; }
-        public ReturnModel(ReturnMsg retMsg)
-        {
-            "".ToString();
-        }
     }
 }
