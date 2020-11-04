@@ -9,6 +9,7 @@ using ZC.DAL.BLL;
 using ZC.DBUtils;
 using Newtonsoft.Json;
 using JiangXinService.Utils;
+using Newtonsoft.Json.Linq;
 
 namespace JiangXinService
 {
@@ -16,8 +17,10 @@ namespace JiangXinService
     {
         LoginUserInfo userInfo;
         public EquipmentModel model;
-        Sfcdatequipmentspecies equipmentspecieModel;
         string sqlConn;
+
+        #region 设备预警
+
         public ReturnMsg GetEquipmentWarning(string sqlConn, object Parameter)
         {
             this.sqlConn = sqlConn;
@@ -311,11 +314,15 @@ order by datediff(
             return cmdSql;
         }
 
-        public ReturnMsg AutoSetEquipmentSpecieCodeTest(string sqlConn, Sfcdatequipmentspecies equipmentspecieModel)
+        #endregion
+
+        #region 动态创建设备种类子节点的Code值
+
+        public ReturnMsg AutoSetEquipmentSpecieCodeTest(string sqlConn, sysdatdepartment sysdatdepartment)
         {
             this.sqlConn = sqlConn;
             //equipmentspecieModel = JsonConvert.DeserializeObject<Sfcdatequipmentspecies>(Parameter.ToString());
-            return SetEquipmentSpecieCode(equipmentspecieModel);
+            return SetDepartmentCode(sysdatdepartment);
         }
         /// <summary>
         /// 动态创建设备种类子节点的Code值
@@ -324,10 +331,31 @@ order by datediff(
         public ReturnMsg AutoSetEquipmentSpecieCode(InvokeEntity Parameter)
         {
             userInfo = BasePubCommon.FindLoginUserInfo(Parameter.token);
-            equipmentspecieModel = JsonConvert.DeserializeObject<Sfcdatequipmentspecies>(Parameter.obj.ToString());
-            equipmentspecieModel.Creator = userInfo.UserName;
+            var JO = JsonConvert.DeserializeObject<JObject>(Parameter.obj.ToString());
+            var tablename = (JO["tablename"] == null ? "" : JO["tablename"].ToString());
             this.sqlConn = userInfo.SQLCONN;
-            return SetEquipmentSpecieCode(equipmentspecieModel);
+            switch (tablename)
+            {
+                case "sfcdatequipmentspecies":
+                    var equipmentspecieModel = JsonConvert.DeserializeObject<Sfcdatequipmentspecies>(Parameter.obj.ToString());
+                    equipmentspecieModel.Creator = userInfo.UserName;
+                    resultData = SetEquipmentSpecieCode(equipmentspecieModel);
+                    break;
+                case "sysdatdepartment":
+                    var sysdatdepartment = JsonConvert.DeserializeObject<sysdatdepartment>(Parameter.obj.ToString());
+                    sysdatdepartment.CREATOR = userInfo.UserName;
+                    resultData = SetDepartmentCode(sysdatdepartment);
+                    break;
+                case "sfcdaterrortype":
+                    var sfcdaterrortype = JsonConvert.DeserializeObject<sfcdaterrortype>(Parameter.obj.ToString());
+                    sfcdaterrortype.creator = userInfo.UserName;
+                    resultData = SetErrortypeCode(sfcdaterrortype);
+                    break;
+                default:
+                    break;
+
+            }
+            return resultData;
         }
 
         ReturnMsg SetEquipmentSpecieCode(Sfcdatequipmentspecies model)
@@ -411,6 +439,87 @@ Attributionid
             return resultData;
         }
 
+        ReturnMsg SetDepartmentCode(sysdatdepartment model)
+        {
+            if (string.IsNullOrWhiteSpace(model.ParentCode))
+            {
+                model.ParentCode = "0";
+            }
+            if (model != null)
+            {
+                string maxCode = string.Empty;
+                string maxCodeSql = "select CONCAT('00',max(c.DepartID)+1) maxcode from sysdatdepartment c where c.ParentCode=@parentcode;";
+                CmdParameter[] maxCodeparas = new CmdParameter[1];
+                maxCodeparas[0] = new CmdParameter() { DBtype = DBType.String, ParameterName = "@parentcode", Value = model.ParentCode };
+                DataSet ds = new BaseSQL(sqlConn).QuserDs(maxCodeSql, maxCodeparas);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    var row = ds.Tables[0].Rows[0];
+                    maxCode = row["maxcode"] != DBNull.Value ? row["maxcode"].ToString() : (model.ParentCode + "001");
+                }
+                else
+                {
+                    Fail("未查询到数据表sysdatdepartment对应的parentCode数据");
+                }
+
+                model.DepartID = maxCode;
+                bool flag = AddBysql<sysdatdepartment>(model);
+                if (flag)
+                {
+                    Success();
+                }
+                else
+                {
+                    Fail($"插入数据表sysdatdepartment失败！");
+                }
+            }
+            return resultData;
+        }
+
+        ReturnMsg SetErrortypeCode(sfcdaterrortype model)
+        {
+           
+            if (string.IsNullOrWhiteSpace(model.parentcode))
+            {
+                model.parentcode = "0";
+            }
+            if (model != null)
+            {
+                string maxCode = string.Empty;
+                string maxCodeSql = "select CONCAT('00',max(c.errorcode)+1) maxcode from sfcdaterrortype c where c.parentcode=@parentcode;";
+                CmdParameter[] maxCodeparas = new CmdParameter[1];
+                maxCodeparas[0] = new CmdParameter() { DBtype = DBType.String, ParameterName = "@parentcode", Value = model.parentcode };
+                DataSet ds = new BaseSQL(sqlConn).QuserDs(maxCodeSql, maxCodeparas);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    var row = ds.Tables[0].Rows[0];
+                    maxCode = row["maxcode"] != DBNull.Value ? row["maxcode"].ToString() : (model.parentcode + "001");
+                }
+                else
+                {
+                    Fail("未查询到数据表sfcdaterrortype对应的parentcode数据");
+                }
+
+                model.errorcode = maxCode;
+                bool flag = AddBysql<sfcdaterrortype>(model);
+                if (flag)
+                {
+                    Success();
+                }
+                else
+                {
+                    Fail($"插入数据表sfcdaterrortype失败！");
+                }
+            }
+            return resultData;
+        }
+
+        #endregion
+
+        
+
+        #region 设备折旧
+
         public ReturnMsg Equiparameter(InvokeEntity Parameter)
         {
             model = JsonConvert.DeserializeObject<EquipmentModel>(Parameter.obj.ToString());
@@ -473,16 +582,137 @@ GROUP BY
             return resultData;
         }
 
+
+        #endregion
+
         /// <summary>
-        /// 获取合同结算
+        /// 删除单个台账管理信息
         /// </summary>
         /// <param name="Parameter"></param>
         /// <returns></returns>
-        //ReturnMsg GetContractSettlement(InvokeEntity Parameter) { }
-        //select* from student limit(curPage-1)*pageSize,pageSize;
-        object ReadEveryLine(DataRow row)
+        public ReturnMsg DeleteEqui(InvokeEntity Parameter)
         {
-            return default(object);
+            userInfo = BasePubCommon.FindLoginUserInfo(Parameter.token);
+            var JO = JsonConvert.DeserializeObject<JObject>(Parameter.obj.ToString());
+            var code = JO["equiCode"].ToString();
+            this.sqlConn = Parameter.SqlConnection;
+            var conn = new BaseSQL(sqlConn);
+            bool flag = false;
+            try
+            {
+                Fail("删除失败");
+                //删除设备以及关联的表信息
+                conn.BeginTrans();
+
+
+                //删除设备信息
+                string Sql = "delete from sfcdatequipmentinfo where code=@code";
+                CmdParameter[] paras = new CmdParameter[1];
+                paras[0] = new CmdParameter() { DBtype = DBType.String, ParameterName = "@code", Value = code };
+                flag = conn.ExeSql(Sql, paras);
+
+                //删除附件信息
+                Sql = "delete from sfcdatattachment  where equipmentinfocode=@code";
+                flag = conn.ExeSql(Sql, paras);
+
+                //删除文档信息
+                Sql = "delete from sfcdatdocument  where equipmentinfocode=@code";
+                flag = conn.ExeSql(Sql, paras);
+
+                //删除图片信息
+                Sql = "delete from sfcdatpic  where equipmentinfocode=@code";
+                flag = conn.ExeSql(Sql, paras);
+
+                //删除维修记录
+                Sql = "delete from sfcdatmaintenancerecord  where equipmentcode=@code";
+                flag = conn.ExeSql(Sql, paras);
+
+                //删除调拨记录
+                Sql = "delete from sfcdattransferrecord  where equipmentinfocode=@code";
+                flag = conn.ExeSql(Sql, paras);
+
+                //删除报废记录
+                Sql = "delete from sfcdatscraprecord  where equipmentinfocode =@code";
+                flag = conn.ExeSql(Sql, paras);
+
+                //删除其它异动
+                Sql = "delete from sfcdatothermove  where equipmentinfocode =@code";
+                flag = conn.ExeSql(Sql, paras);
+
+                //删除定期检修
+                Sql = "delete from sfcdatrepairinfo  where equipmentcode =@code";
+                flag = conn.ExeSql(Sql, paras);
+
+                conn.Commit();
+                Success();
+                return resultData;
+            }
+            catch (Exception ex)
+            {
+                conn.Rollback();
+                return resultData;
+            }
+        }
+
+
+
+
+        void getProperties<T>(T t, Dictionary<string, CmdParameter> dic, bool? isContainID = false)
+        {
+            string tStr = string.Empty;
+            if (t == null)
+            {
+                return;
+            }
+            System.Reflection.PropertyInfo[] properties = t.GetType().GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+            if (properties.Length <= 0)
+            {
+                return;
+            }
+            foreach (System.Reflection.PropertyInfo item in properties)
+            {
+                string name = item.Name;
+                object value = item.GetValue(t, null);
+                if (item.PropertyType.IsValueType || item.PropertyType.Name.StartsWith("String"))
+                {
+                    //tStr += string.Format("{0}:{1},", name, value);
+                    if ((name.ToUpper() == "ID" && isContainID == false) || name.ToUpper() == "CREATETIME" || name.ToUpper() == "UPDATETIME")
+                        continue;
+
+                    if (value != null)
+                        dic.Add(name, new CmdParameter() { ParameterName = $"@{name}", Value = value.ToString() });
+
+                }
+                else
+                {
+                    getProperties((T)value, dic);
+                }
+            }
+        }
+
+        Tuple<string, CmdParameter[]> GetAddSql<T>(T entity, bool? isContainID = false)
+        {
+            Dictionary<string, CmdParameter> dic = new Dictionary<string, CmdParameter>();
+            StringBuilder insertSql = new StringBuilder();
+            getProperties(entity, dic, isContainID);
+
+            string s = string.Empty;
+            foreach (string str in dic.Keys)
+            {
+                s += $"@{str},";
+            }
+            s = s.TrimEnd(',');
+            insertSql.AppendFormat("INSERT INTO {0}({1}) VALUES({2})", entity.GetType().Name, string.Join(",", dic.Keys), s);
+            return new Tuple<string, CmdParameter[]>(insertSql.ToString(), dic.Values.ToArray());
+        }
+
+        public virtual bool AddBysql<T>(T entity, bool? isContainID = false)
+        {
+            var tuple = GetAddSql(entity, isContainID);
+            var insertSql = tuple.Item1;
+            var sqlP = tuple.Item2;
+            var result = new BaseSQL(sqlConn).ExeSql(insertSql, sqlP);
+            return result;
         }
     }
 
@@ -524,4 +754,89 @@ GROUP BY
         public string Createtime { get; set; }
         public string Updatetime { get; set; }
     }
+
+    public class sysdatdepartment
+    {
+        public int id { get; set; }
+
+
+
+        public string DepartID { get; set; }
+
+
+
+        public string DepartName { get; set; }
+
+
+
+        public string ParentCode { get; set; }
+
+
+        public string ParentName { get; set; }
+
+
+        public string internalcode { get; set; }
+
+
+        public string PicLoginID { get; set; }
+
+
+        public string PicUserName { get; set; }
+
+
+
+        public string ISENABLE { get; set; }
+
+
+        public string CREATOR { get; set; }
+
+
+
+        public DateTime? CREATETIME { get; set; }
+
+
+
+        public DateTime? UPDATETIME { get; set; }
+    }
+
+    public class sfcdaterrortype
+    {
+        public int id { get; set; }
+
+
+
+        public string errorcode { get; set; }
+
+
+
+        public string errorname { get; set; }
+
+
+        public string parentcode { get; set; }
+
+
+        public string parentname { get; set; }
+
+
+
+        public string description { get; set; }
+
+
+
+        public string solution { get; set; }
+
+
+
+        public string creator { get; set; }
+
+
+
+        public DateTime createtime { get; set; }
+
+
+
+        public DateTime updatetime { get; set; }
+    }
+
+
 }

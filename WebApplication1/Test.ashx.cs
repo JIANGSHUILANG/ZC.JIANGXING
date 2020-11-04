@@ -38,7 +38,7 @@ namespace WebApplication1
             ss.Creator = "江";
             EquipmentparameterModule em = new EquipmentparameterModule();
 
-            var cc=em.AutoSetEquipmentSpecieCodeTest(_SQLCONN2, ss);
+           // var cc=em.AutoSetEquipmentSpecieCodeTest(_SQLCONN2, ss);
 
 
         }
