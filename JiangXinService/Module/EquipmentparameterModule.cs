@@ -478,7 +478,7 @@ Attributionid
 
         ReturnMsg SetErrortypeCode(sfcdaterrortype model)
         {
-           
+
             if (string.IsNullOrWhiteSpace(model.parentcode))
             {
                 model.parentcode = "0";
@@ -515,8 +515,6 @@ Attributionid
         }
 
         #endregion
-
-        
 
         #region 设备折旧
 
@@ -655,6 +653,24 @@ GROUP BY
         }
 
 
+        public ReturnMsg StatisticalEqui(InvokeEntity Parameter)
+        {
+            this.sqlConn = Parameter.SqlConnection;
+            StringBuilder str = new StringBuilder();
+            str.Append("select v.Attributionname 设备归属, count(1) 设备个数 from v_sfcdatequipmentparameter v group by v.Attributionname;");
+            str.Append("select v.eminame 设备名称, count(1) 设备个数 from v_sfcdatequipmentparameter v group by v.eminame;");
+            str.Append("select v.emisstatus 设备状态, count(1) 设备个数 from v_sfcdatequipmentparameter v group by v.emisstatus;");
+            str.Append("select v.positionfloor 楼层, v.positionhouse 厂房, count(1) 设备个数 from v_sfcdatequipmentparameter v group by v.positionfloor, v.positionhouse;");
+            DataSet ds_StatisticalEqui = new BaseSQL(sqlConn).QuserDs(str.ToString(), new CmdParameter[] { });
+            resultData.item = new
+            {
+                AttributionData = ds_StatisticalEqui.Tables[0],
+                EquiNameData = ds_StatisticalEqui.Tables[1],
+                EquiStatusData = ds_StatisticalEqui.Tables[2],
+                PositionData = ds_StatisticalEqui.Tables[3]
+            };
+            return resultData;
+        }
 
 
         void getProperties<T>(T t, Dictionary<string, CmdParameter> dic, bool? isContainID = false)
@@ -689,6 +705,8 @@ GROUP BY
                 }
             }
         }
+
+
 
         Tuple<string, CmdParameter[]> GetAddSql<T>(T entity, bool? isContainID = false)
         {

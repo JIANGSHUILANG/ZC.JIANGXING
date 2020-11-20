@@ -68,7 +68,7 @@ namespace JiangXinTest
             dep.CREATOR = "";
 
             EquipmentparameterModule em = new EquipmentparameterModule();
-            em.AutoSetEquipmentSpecieCodeTest(sqlConn,dep);
+            em.StatisticalEqui(sqlConn);
 
             Console.ReadKey();
             int aaaa = 0;
