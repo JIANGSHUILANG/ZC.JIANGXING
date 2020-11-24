@@ -751,7 +751,7 @@ GROUP BY
         /// </summary>
         public string scrapmonth { get; set; }
         /// <summary>
-        /// 折旧方式名称
+        /// 折旧方式名称 
         /// </summary>
         public string depreciationwayname { get; set; }
         /// <summary>
